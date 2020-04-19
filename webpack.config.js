@@ -1,3 +1,5 @@
+const purgecss = require("@fullhuman/postcss-purgecss");
+
 module.exports = {
   module: {
     rules: [
@@ -11,6 +13,11 @@ module.exports = {
             require("postcss-import"),
             require("tailwindcss"),
             require("autoprefixer"),
+            purgecss({
+              content: ["./**/*.html"],
+              defaultExtractor: (content) =>
+                content.match(/[\w-/:]+(?<!:)/g) || [],
+            }),
           ],
         },
       },
